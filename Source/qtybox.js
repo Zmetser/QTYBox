@@ -92,14 +92,11 @@ var QTYBox = new Class({
 		
 		//bind key events
 		this.qtyfield.addEvent('keypress', function(event) { 
-			_this.options.onChange(this);
 			
 			if (event.key == 'up' || event.key == 'right'){
 				_this.incrase();
-				_this.options.onIncrase(this);
 			} else if (event.key == 'down' || event.key == 'left'){
 				_this.decrase();
-				_this.options.onDecrase(this);
 			} else {
 				_this.checkValue(event);			
 			}
@@ -119,7 +116,7 @@ var QTYBox = new Class({
 			
 			if (event.key != 'backspace' && event.key != 'delete'){
 				event.preventDefault();
-				if (event.key == '-' && this.qtyvalue > 0 && !this.qtyvalue.test('-')) { 
+				if (event.key == '-' && this.qtyvalue > 0 && !this.qtyvalue.test('-') && this.options.minValue.toFloat() < 0) { 
 					var newValue = event.key + this.qtyvalue;
 				} else if (event.key != '-'){
 					var newValue = this.qtyvalue + event.key;
@@ -166,7 +163,7 @@ var QTYBox = new Class({
 		}
 	},
 	error:function(){
-		var bg_color=this.qtyfield.getStyle('backgroundColor');
+		var bg_color=this.qtyfield.getStyle('backgroundColor').hexToRgb();
 		if (this.options.showError){this.qtyfield.highlight(this.options.hlColor,bg_color)}
 	},
 	getValue: function(){
