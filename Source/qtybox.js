@@ -52,7 +52,7 @@ var QTYBox = new Class({
 		 } else {
 			 this.qtyfield = this.createInput();
 			 this.qtyvalue = this.options.initValue;
-			 this.cbox = new Element('div',{class:this.options.cboxClass});
+			 this.cbox = new Element('div',{'class':this.options.cboxClass});
 			 this.cbox.appendChild(this.qtyfield);
 			 this.initController();
 			 return this.cbox;
@@ -91,15 +91,12 @@ var QTYBox = new Class({
 		
 		
 		//bind key events
-		this.qtyfield.addEvent('keypress', function(event) { 
-			_this.options.onChange(this);
-			
+		this.qtyfield.addEvent('keypress', function(event) {
+			 
 			if (event.key == 'up' || event.key == 'right'){
 				_this.incrase();
-				_this.options.onIncrase(this);
 			} else if (event.key == 'down' || event.key == 'left'){
 				_this.decrase();
-				_this.options.onDecrase(this);
 			} else {
 				_this.checkValue(event);			
 			}
